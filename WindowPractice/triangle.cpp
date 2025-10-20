@@ -2,7 +2,7 @@
 #include"shader.h"
 #include "matrix4.h"
 
-OpenGLResources InitTriangle() {
+OpenGLResources InitTriangle(const char* vertexShaderSource, const char* fragmentShaderSource) {
 
     OpenGLResources glr;
 
@@ -43,40 +43,6 @@ OpenGLResources InitTriangle() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
     glEnableVertexAttribArray(1);
-    
-    const char* vertexShaderSource = R"(
-        #version 330 core
-        layout (location = 0) in vec3 aPos;
-        layout (location = 1) in vec3 aColor;
-
-        out vec3 vertexColor;
-
-        uniform mat4 model;
-        uniform mat4 view;
-        uniform mat4 projection;
-
-        void main() {
-            gl_Position = projection * view * model * vec4(aPos, 1.0);
-            vertexColor = aColor;
-        }
-    )";
-
-    const char* fragmentShaderSource = R"(
-        #version 330 core
-        // Normalize for safety
-        in vec3 vertexColor;
-        out vec4 FragColor;
-        uniform float uTime;
-           
-        void main() {
-            FragColor = vec4(
-                abs(tan(uTime)) * vertexColor.x,
-                abs(tan(uTime)) * vertexColor.y,
-                abs(tan(uTime)) * vertexColor.z,
-                1.0
-            );
-        }
-    )";
 
     Shader shader(vertexShaderSource, fragmentShaderSource);
     glr.shaderProgram = shader.ID;

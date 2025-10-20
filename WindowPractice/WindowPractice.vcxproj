@@ -144,6 +144,7 @@
     <ClCompile Include="matrix4.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="triangle.cpp" />
+    <ClCompile Include="utils.cpp" />
     <ClCompile Include="vector3.cpp" />
     <ClCompile Include="vector4.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -156,6 +157,13 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="triangle.h" />
+    <ClInclude Include="utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="flat.frag" />
+    <None Include="flat.vert" />
+    <None Include="rainbow.frag" />
+    <None Include="rainbow.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

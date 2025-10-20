@@ -14,6 +14,6 @@ struct OpenGLResources {
 	Matrix4 getWorldMatrix();
 };
 
-OpenGLResources InitTriangle();
+OpenGLResources InitTriangle(const char* vertexShaderSource, const char* fragmentShaderSource);
 
 void DrawTriangle(const OpenGLResources& glr, HDC hdc, Camera &camera, Matrix4 &projectionMatrix, float &time);

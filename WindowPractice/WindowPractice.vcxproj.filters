@@ -19,18 +19,24 @@
     <Filter Include="Header Files\Math">
       <UniqueIdentifier>{a88e4f0d-1bc5-495c-ba6e-42cedcce29f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Utils">
+    <Filter Include="Header Files\Misc">
       <UniqueIdentifier>{869de43e-6620-4e95-a6a9-13c16c2feb2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Misc">
+      <UniqueIdentifier>{a87c1de6-51da-420d-9a46-493bb0a08514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shaders">
+      <UniqueIdentifier>{d0dd07c5-8ff7-4a95-b188-b00e8c289b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\3D Objects">
+      <UniqueIdentifier>{648094bd-b787-4a07-b612-3c0f314c6314}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\3D Objects">
+      <UniqueIdentifier>{d2287473-76f4-4dda-b046-0b117d012f7c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="triangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="vector3.cpp">
@@ -43,18 +49,24 @@
       <Filter>Source Files\Math</Filter>
     </ClCompile>
     <ClCompile Include="camera.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle.cpp">
+      <Filter>Source Files\3D Objects</Filter>
     </ClCompile>
     <ClCompile Include="grid.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\3D Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Math debug\Math debug\matrix4.h">
       <Filter>Header Files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Math debug\Math debug\shader.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Math debug\Math debug\vector3.h">
       <Filter>Header Files\Math</Filter>
@@ -63,13 +75,33 @@
       <Filter>Header Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
-      <Filter>Header Files\Utils</Filter>
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Math debug\Math debug\shader.h">
+      <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="triangle.h">
-      <Filter>Header Files\Utils</Filter>
+      <Filter>Header Files\3D Objects</Filter>
     </ClInclude>
     <ClInclude Include="grid.h">
-      <Filter>Header Files\Utils</Filter>
+      <Filter>Header Files\3D Objects</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="rainbow.vert">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="rainbow.frag">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="flat.vert">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="flat.frag">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
 const int size = 8;
 const int numVertices = (size * 2 + 1) * 4;
 
-OpenGLResourcesGrid InitGrid() {
+OpenGLResourcesGrid InitGrid(const char* vertexShaderSource, const char* fragmentShaderSource) {
 
     OpenGLResourcesGrid glr;
     float vertices[numVertices * 3]; 
@@ -45,29 +45,6 @@ OpenGLResourcesGrid InitGrid() {
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-
-    // TODO: EVENTUALLY USE GLSL FILES FOR THE SHADERS
-    // gl_Position = projection * view * modle * vec4(aPos, 1.0);
-    const char* vertexShaderSource = R"(
-        #version 330 core
-        layout (location = 0) in vec3 aPos;
-
-        uniform mat4 model;
-        uniform mat4 view;
-        uniform mat4 projection;
-
-        void main() {
-            gl_Position = projection * view * model * vec4(aPos, 1.0);
-        }
-    )";
-
-    const char* fragmentShaderSource = R"(
-        #version 330 core
-        out vec4 FragColor;
-        void main() {
-            FragColor = vec4(0.2, 0.3, 0.7, 1.0);
-        }
-    )";
 
     Shader shader(vertexShaderSource, fragmentShaderSource);
     glr.shaderProgram = shader.ID;

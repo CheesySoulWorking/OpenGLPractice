@@ -12,6 +12,7 @@
 #include "matrix4.h"
 #include "camera.h"
 #include "math.h"
+#include "utils.h"
 
 extern int WIDTH = 1920;
 extern int HEIGHT = 1080;
@@ -85,23 +86,40 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
     glewInit();
 
-    // Loop to draw triangle
+    // Set up 3D scene
     // ===========================================================================================================
-    Matrix4 projectionMatrix = Matrix4();
-    Camera camera = Camera();
-    camera.cameraPosition = Vector3(0, 0, 20);
-    OpenGLResources glr = InitTriangle();
-    OpenGLResourcesGrid grid = InitGrid();
-    //OpenGLResources grid = InitGrid();
+    
+    // Load Shaders
+    std::string triangleVertSrc = LoadShaderSource("rainbow.vert");
+    std::string triangleFragSrc = LoadShaderSource("rainbow.frag");
+    const char* triangleVertShader = triangleVertSrc.c_str();
+    const char* triangleFragShader = triangleFragSrc.c_str();
 
+    std::string gridVertSrc = LoadShaderSource("flat.vert");
+    std::string gridFragSrc = LoadShaderSource("flat.frag");
+    const char* gridVertShader = gridVertSrc.c_str();
+    const char* gridFragShader = gridFragSrc.c_str();Matrix4 projectionMatrix = Matrix4();
+    
+    
+    // Set up scene projection method (in this case, perspective projection)
     float aspectRatio = (float)WIDTH / (float)HEIGHT;
     projectionMatrix.makePerspective(45.0f, aspectRatio, 0.1, 1000.0);
+
+    // Create Camera
+    Camera camera = Camera();
+    camera.cameraPosition = Vector3(0, 0, 20);
+    
+    // Initialize 3D Objects
+    OpenGLResources glr = InitTriangle(triangleVertShader, triangleFragShader);
+    OpenGLResourcesGrid grid = InitGrid(gridVertShader, gridFragShader);
 
     // Set background color, and enable depth test for objects being rendered in front or back.
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
+    // Loop to draw triangle
+    // ===========================================================================================================
     MSG msg = {};
     while (true)
     {
@@ -126,7 +144,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
         SwapBuffers(hdc);
     }
-
 
     // Clean up wgl when done here for now?
     wglMakeCurrent(NULL, NULL);

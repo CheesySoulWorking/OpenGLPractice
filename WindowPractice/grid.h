@@ -14,6 +14,6 @@ struct OpenGLResourcesGrid {
 	Matrix4 getWorldMatrix();
 };
 
-OpenGLResourcesGrid InitGrid();
+OpenGLResourcesGrid InitGrid(const char* vertexShaderSource, const char* fragmentShaderSource);
 
 void DrawGrid(const OpenGLResourcesGrid& grid, HDC hdc, Camera& camera, Matrix4& projectionMatrix);
