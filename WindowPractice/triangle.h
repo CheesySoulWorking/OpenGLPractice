@@ -8,6 +8,7 @@ struct OpenGLResources {
 	GLuint VAO = 0;
 	GLuint VBO = 0;
 	GLuint VBOColors = 0;
+	GLuint VBONormals = 0;
 	GLuint shaderProgram = 0;
 
 	Matrix4 worldMatrix;

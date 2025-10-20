@@ -90,15 +90,22 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     // ===========================================================================================================
     
     // Load Shaders
-    std::string triangleVertSrc = LoadShaderSource("rainbow.vert");
+    /*std::string triangleVertSrc = LoadShaderSource("rainbow.vert");
     std::string triangleFragSrc = LoadShaderSource("rainbow.frag");
+    const char* triangleVertShader = triangleVertSrc.c_str();
+    const char* triangleFragShader = triangleFragSrc.c_str();*/
+
+    std::string triangleVertSrc = LoadShaderSource("phong.vert");
+    std::string triangleFragSrc = LoadShaderSource("phong.frag");
     const char* triangleVertShader = triangleVertSrc.c_str();
     const char* triangleFragShader = triangleFragSrc.c_str();
 
     std::string gridVertSrc = LoadShaderSource("flat.vert");
     std::string gridFragSrc = LoadShaderSource("flat.frag");
     const char* gridVertShader = gridVertSrc.c_str();
-    const char* gridFragShader = gridFragSrc.c_str();Matrix4 projectionMatrix = Matrix4();
+    const char* gridFragShader = gridFragSrc.c_str();
+    
+    Matrix4 projectionMatrix = Matrix4();
     
     
     // Set up scene projection method (in this case, perspective projection)
@@ -125,10 +132,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     {
         float time = GetTickCount() / 1000.0f;
         camera.cameraWorldMatrix.makeIdentity();
-        camera.cameraWorldMatrix.multiply(Matrix4().makeRotationY(time * 50));
+        //camera.cameraWorldMatrix.multiply(Matrix4().makeRotationY(time * 50));
         //camera.cameraWorldMatrix.multiply(Matrix4().makeRotationX(time * 50));
         camera.cameraWorldMatrix.multiply(Matrix4().makeTranslation(0, 0, 5));
-        //glr.worldMatrix.makeIdentity().multiply(Matrix4().makeTranslation(0, 0, -(sin(time))));
+        glr.worldMatrix.makeIdentity().multiply(Matrix4().makeRotationY((sin(time) * 90)));
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
             if (msg.message == WM_QUIT)

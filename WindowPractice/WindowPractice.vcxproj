@@ -162,6 +162,8 @@
   <ItemGroup>
     <None Include="flat.frag" />
     <None Include="flat.vert" />
+    <None Include="phong.frag" />
+    <None Include="phong.vert" />
     <None Include="rainbow.frag" />
     <None Include="rainbow.vert" />
   </ItemGroup>
