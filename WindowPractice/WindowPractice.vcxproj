@@ -140,11 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="custom_model.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="matrix4.cpp" />
+    <ClCompile Include="model.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="triangle.cpp" />
-    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="load_shader.cpp" />
+    <ClCompile Include="vector2.cpp" />
     <ClCompile Include="vector3.cpp" />
     <ClCompile Include="vector4.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -155,9 +158,12 @@
     <ClInclude Include="..\..\Math debug\Math debug\vector3.h" />
     <ClInclude Include="..\..\Math debug\Math debug\vector4.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="custom_model.h" />
     <ClInclude Include="grid.h" />
+    <ClInclude Include="model.h" />
     <ClInclude Include="triangle.h" />
-    <ClInclude Include="utils.h" />
+    <ClInclude Include="load_shader.h" />
+    <ClInclude Include="vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="flat.frag" />

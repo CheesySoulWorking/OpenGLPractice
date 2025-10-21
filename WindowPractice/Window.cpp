@@ -7,12 +7,12 @@
 #include <GL/gl.h>
 #include "triangle.h"
 #include "grid.h"
-//#include "vector3.h"
-//#include "vector4.h"
 #include "matrix4.h"
 #include "camera.h"
 #include "math.h"
-#include "utils.h"
+#include "load_shader.h"
+#include "model.h"
+#include "custom_model.h"
 
 extern int WIDTH = 1920;
 extern int HEIGHT = 1080;
@@ -90,15 +90,21 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     // ===========================================================================================================
     
     // Load Shaders
-    /*std::string triangleVertSrc = LoadShaderSource("rainbow.vert");
-    std::string triangleFragSrc = LoadShaderSource("rainbow.frag");
-    const char* triangleVertShader = triangleVertSrc.c_str();
-    const char* triangleFragShader = triangleFragSrc.c_str();*/
+    std::string cubePhongVertSrc = LoadShaderSource("phong.vert");
+    std::string cubePhongFragSrc = LoadShaderSource("phong.frag");
+    const char* cubePhongVertShader = cubePhongVertSrc.c_str();
+    const char* cubePhongFragShader = cubePhongFragSrc.c_str();
 
-    std::string triangleVertSrc = LoadShaderSource("phong.vert");
-    std::string triangleFragSrc = LoadShaderSource("phong.frag");
-    const char* triangleVertShader = triangleVertSrc.c_str();
-    const char* triangleFragShader = triangleFragSrc.c_str();
+    std::string legoshiPhongVertSrc = LoadShaderSource("phong.vert");
+    std::string legoshiPhongFragSrc = LoadShaderSource("phong.frag");
+    const char* legoshiPhongVertShader = legoshiPhongVertSrc.c_str();
+    const char* legoshiPhongFragShader = legoshiPhongFragSrc.c_str();
+
+    std::string rainbowVertSrc = LoadShaderSource("rainbow.vert");
+    std::string rainbowFragSrc = LoadShaderSource("rainbow.frag");
+    const char* rainbowVertShader = rainbowVertSrc.c_str();
+    const char* rainbowFragShader = rainbowFragSrc.c_str();
+
 
     std::string gridVertSrc = LoadShaderSource("flat.vert");
     std::string gridFragSrc = LoadShaderSource("flat.frag");
@@ -117,8 +123,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     camera.cameraPosition = Vector3(0, 0, 20);
     
     // Initialize 3D Objects
-    OpenGLResources glr = InitTriangle(triangleVertShader, triangleFragShader);
+    Model legoshiData = loadOBJ("Models/legoshi.obj");
+    Model cubeData = loadOBJ("Models/cube.obj");
+    OpenGLModel cube = InitModel(cubeData, cubePhongVertShader, cubePhongFragShader);
+    OpenGLModel legoshi = InitModel(legoshiData, legoshiPhongVertShader, legoshiPhongFragShader);
+    //OpenGLResources glr = InitTriangle(rainbowVertShader, rainbowFragShader);
     OpenGLResourcesGrid grid = InitGrid(gridVertShader, gridFragShader);
+
+    legoshi.worldMatrix.makeIdentity().multiply(Matrix4().makeTranslation(1, 0, 0)).multiply(Matrix4().makeScale(0.3, 0.3, 0.3));
+    cube.worldMatrix.makeIdentity().multiply(Matrix4().makeTranslation(-1, 0, 0));
+
 
     // Set background color, and enable depth test for objects being rendered in front or back.
     glEnable(GL_DEPTH_TEST);
@@ -132,10 +146,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     {
         float time = GetTickCount() / 1000.0f;
         camera.cameraWorldMatrix.makeIdentity();
-        //camera.cameraWorldMatrix.multiply(Matrix4().makeRotationY(time * 50));
-        //camera.cameraWorldMatrix.multiply(Matrix4().makeRotationX(time * 50));
+        camera.cameraWorldMatrix.multiply(Matrix4().makeRotationY(time * 50));
         camera.cameraWorldMatrix.multiply(Matrix4().makeTranslation(0, 0, 5));
-        glr.worldMatrix.makeIdentity().multiply(Matrix4().makeRotationY((sin(time) * 90)));
+
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
             if (msg.message == WM_QUIT)
@@ -146,8 +159,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        DrawTriangle(glr, hdc, camera, projectionMatrix, time);
+        //DrawTriangle(glr, hdc, camera, projectionMatrix, time);
         DrawGrid(grid, hdc, camera, projectionMatrix);
+        DrawModel(cube, hdc, camera, projectionMatrix, time);
+        DrawModel(legoshi, hdc, camera, projectionMatrix, time);
 
         SwapBuffers(hdc);
     }

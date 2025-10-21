@@ -28,13 +28,13 @@ void main() {
 
     // here we would be the vec4 textureColor using textur2D(uniform texture, passed in texCoord);
     // then set the diffuse color to the textureColor we just made multiplied by the lambert term.
-    vec3 diffuseColor = vec3(1.0, 0.2, 0.7) * lambertTerm;
+    vec3 diffuseColor = vec3(1.0, 1.0, 1.0) * lambertTerm;
 
     vec3 specMaterialColor = vec3(0.3);
 
     // here would be the vec3 albedo set by another texture2D(uniform texture, passed in texCoord).rgb (we specifically want to express the rgb of the texture)
-    // then replace the diffuseColor with the albedo.
-    vec3 ambient = diffuseColor * 0.1;
+    // then replace the vec3 with the albedo.
+    vec3 ambient = vec3(1.0, 1.0, 1.0) * 0.3;
     vec3 specularColor = phongTerm * specMaterialColor * 1.0;
 
     vec3 finalColor = ambient + diffuseColor + specularColor;

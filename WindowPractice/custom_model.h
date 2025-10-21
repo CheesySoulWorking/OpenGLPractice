@@ -3,8 +3,9 @@
 #include <Windows.h>
 #include "matrix4.h"
 #include "camera.h"
+#include "model.h"
 
-struct OpenGLResources {
+struct OpenGLModel {
 	GLuint VAO = 0;
 	GLuint VBO = 0;
 	GLuint VBOColors = 0;
@@ -15,6 +16,6 @@ struct OpenGLResources {
 	Matrix4 getWorldMatrix();
 };
 
-OpenGLResources InitTriangle(const char* vertexShaderSource, const char* fragmentShaderSource);
+OpenGLModel InitModel(Model& model, const char* vertexShaderSource, const char* fragmentShaderSource);
 
-void DrawTriangle(const OpenGLResources& glr, HDC hdc, Camera &camera, Matrix4 &projectionMatrix, float &time);
+void DrawModel(const OpenGLModel& glr, HDC hdc, Camera& camera, Matrix4& projectionMatrix, float& time);
