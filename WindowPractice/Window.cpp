@@ -111,16 +111,18 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     const char* gridVertShader = gridVertSrc.c_str();
     const char* gridFragShader = gridFragSrc.c_str();
     
-    Matrix4 projectionMatrix = Matrix4();
-    
     
     // Set up scene projection method (in this case, perspective projection)
     float aspectRatio = (float)WIDTH / (float)HEIGHT;
+    Matrix4 projectionMatrix = Matrix4();
     projectionMatrix.makePerspective(45.0f, aspectRatio, 0.1, 1000.0);
 
     // Create Camera
     Camera camera = Camera();
     camera.cameraPosition = Vector3(0, 0, 20);
+
+    // Create Directional Light Source (Sun)
+    Vector3 directionalLightDirection = Vector3(0.5, 2, 1);
     
     // Initialize 3D Objects
     Model legoshiData = loadOBJ("Models/legoshi.obj");
@@ -146,8 +148,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     {
         float time = GetTickCount() / 1000.0f;
         camera.cameraWorldMatrix.makeIdentity();
-        camera.cameraWorldMatrix.multiply(Matrix4().makeRotationY(time * 50));
+        camera.cameraWorldMatrix.multiply(Matrix4().makeRotationY(45));
         camera.cameraWorldMatrix.multiply(Matrix4().makeTranslation(0, 0, 5));
+        directionalLightDirection.x = sin(time) * 10;
+        directionalLightDirection.z = cos(time) * 50;
 
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
@@ -161,8 +165,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
         //DrawTriangle(glr, hdc, camera, projectionMatrix, time);
         DrawGrid(grid, hdc, camera, projectionMatrix);
-        DrawModel(cube, hdc, camera, projectionMatrix, time);
-        DrawModel(legoshi, hdc, camera, projectionMatrix, time);
+        DrawModel(cube, hdc, camera, projectionMatrix, time, directionalLightDirection);
+        DrawModel(legoshi, hdc, camera, projectionMatrix, time, directionalLightDirection);
 
         SwapBuffers(hdc);
     }

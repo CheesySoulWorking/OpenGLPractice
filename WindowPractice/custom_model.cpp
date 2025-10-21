@@ -43,7 +43,7 @@ Matrix4 OpenGLModel::getWorldMatrix() {
     return this->worldMatrix.clone();
 }
 
-void DrawModel(const OpenGLModel& glr, HDC hdc, Camera& camera, Matrix4& projectionMatrix, float& time)
+void DrawModel(const OpenGLModel& glr, HDC hdc, Camera& camera, Matrix4& projectionMatrix, float& time, Vector3& directionalLightDir)
 {
     // Necessary for all shaders ================================
     Matrix4 model = glr.worldMatrix;
@@ -62,13 +62,12 @@ void DrawModel(const OpenGLModel& glr, HDC hdc, Camera& camera, Matrix4& project
 
     // Specific to phong shader ==================================
     Vector4 cameraPosition = camera.getPosition();
-    Vector3 lightDir = Vector3(0.5, 2, 1).normalize();
 
     GLuint cameraPos = glGetUniformLocation(glr.shaderProgram, "uCameraPosition");
     GLuint lightDirection = glGetUniformLocation(glr.shaderProgram, "uLightDirection");
 
     glUniform3f(cameraPos, cameraPosition.x, cameraPosition.y, cameraPosition.z);
-    glUniform3f(lightDirection, lightDir.x, lightDir.y, lightDir.z);
+    glUniform3f(lightDirection, directionalLightDir.x, directionalLightDir.y, directionalLightDir.z);
 
     // Draw the triangle =========================================
     glBindVertexArray(glr.VAO);
