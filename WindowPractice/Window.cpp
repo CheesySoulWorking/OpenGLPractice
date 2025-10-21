@@ -121,19 +121,22 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     Camera camera = Camera();
     camera.cameraPosition = Vector3(0, 0, 20);
 
-    // Create Directional Light Source (Sun)
+    // Create Light Sources (Directional = sun, positional = point light)
     Vector3 directionalLightDirection = Vector3(0.5, 2, 1);
+    Vector3 positionalLightSrc = Vector3(2, 0, 2);
     
     // Initialize 3D Objects
     Model legoshiData = loadOBJ("Models/legoshi.obj");
     Model cubeData = loadOBJ("Models/cube.obj");
     OpenGLModel cube = InitModel(cubeData, cubePhongVertShader, cubePhongFragShader);
     OpenGLModel legoshi = InitModel(legoshiData, legoshiPhongVertShader, legoshiPhongFragShader);
-    //OpenGLResources glr = InitTriangle(rainbowVertShader, rainbowFragShader);
     OpenGLResourcesGrid grid = InitGrid(gridVertShader, gridFragShader);
 
     legoshi.worldMatrix.makeIdentity().multiply(Matrix4().makeTranslation(1, 0, 0)).multiply(Matrix4().makeScale(0.3, 0.3, 0.3));
     cube.worldMatrix.makeIdentity().multiply(Matrix4().makeTranslation(-1, 0, 0));
+    camera.cameraWorldMatrix.makeIdentity();
+    camera.cameraWorldMatrix.multiply(Matrix4().makeRotationY(45));
+    camera.cameraWorldMatrix.multiply(Matrix4().makeTranslation(0, 0, 5));
 
 
     // Set background color, and enable depth test for objects being rendered in front or back.
@@ -147,11 +150,16 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     while (true)
     {
         float time = GetTickCount() / 1000.0f;
-        camera.cameraWorldMatrix.makeIdentity();
-        camera.cameraWorldMatrix.multiply(Matrix4().makeRotationY(45));
-        camera.cameraWorldMatrix.multiply(Matrix4().makeTranslation(0, 0, 5));
-        directionalLightDirection.x = sin(time) * 10;
-        directionalLightDirection.z = cos(time) * 50;
+
+        /*camera.cameraWorldMatrix.makeIdentity();
+        camera.cameraWorldMatrix.multiply(Matrix4().makeRotationY(time * 50));
+        camera.cameraWorldMatrix.multiply(Matrix4().makeTranslation(0, 0, 5));*/
+
+        /*directionalLightDirection.x = sin(time) * 10;
+        directionalLightDirection.z = cos(time) * 50;*/
+
+        positionalLightSrc.x = sin(time) * 5;
+        positionalLightSrc.z = cos(time) * 5;
 
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
         {
@@ -165,8 +173,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 
         //DrawTriangle(glr, hdc, camera, projectionMatrix, time);
         DrawGrid(grid, hdc, camera, projectionMatrix);
-        DrawModel(cube, hdc, camera, projectionMatrix, time, directionalLightDirection);
-        DrawModel(legoshi, hdc, camera, projectionMatrix, time, directionalLightDirection);
+        DrawModel(cube, hdc, camera, projectionMatrix, time, directionalLightDirection, positionalLightSrc);
+        DrawModel(legoshi, hdc, camera, projectionMatrix, time, directionalLightDirection, positionalLightSrc);
 
         SwapBuffers(hdc);
     }

@@ -18,4 +18,4 @@ struct OpenGLModel {
 
 OpenGLModel InitModel(Model& model, const char* vertexShaderSource, const char* fragmentShaderSource);
 
-void DrawModel(const OpenGLModel& glr, HDC hdc, Camera& camera, Matrix4& projectionMatrix, float& time, Vector3& directionalLIghtDir);
+void DrawModel(const OpenGLModel& glr, HDC hdc, Camera& camera, Matrix4& projectionMatrix, float& time, Vector3& directionalLIghtDir, Vector3& positionalLightSrc);

@@ -43,7 +43,7 @@ Matrix4 OpenGLModel::getWorldMatrix() {
     return this->worldMatrix.clone();
 }
 
-void DrawModel(const OpenGLModel& glr, HDC hdc, Camera& camera, Matrix4& projectionMatrix, float& time, Vector3& directionalLightDir)
+void DrawModel(const OpenGLModel& glr, HDC hdc, Camera& camera, Matrix4& projectionMatrix, float& time, Vector3& directionalLightDir, Vector3& positionalLightSrc)
 {
     // Necessary for all shaders ================================
     Matrix4 model = glr.worldMatrix;
@@ -65,9 +65,11 @@ void DrawModel(const OpenGLModel& glr, HDC hdc, Camera& camera, Matrix4& project
 
     GLuint cameraPos = glGetUniformLocation(glr.shaderProgram, "uCameraPosition");
     GLuint lightDirection = glGetUniformLocation(glr.shaderProgram, "uLightDirection");
+    GLuint lightPosition = glGetUniformLocation(glr.shaderProgram, "uLightPosition");
 
     glUniform3f(cameraPos, cameraPosition.x, cameraPosition.y, cameraPosition.z);
     glUniform3f(lightDirection, directionalLightDir.x, directionalLightDir.y, directionalLightDir.z);
+    glUniform3f(lightPosition, positionalLightSrc.x, positionalLightSrc.y, positionalLightSrc.z);
 
     // Draw the triangle =========================================
     glBindVertexArray(glr.VAO);

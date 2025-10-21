@@ -25,9 +25,6 @@
     <Filter Include="Source Files\Misc">
       <UniqueIdentifier>{a87c1de6-51da-420d-9a46-493bb0a08514}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Shaders">
-      <UniqueIdentifier>{d0dd07c5-8ff7-4a95-b188-b00e8c289b26}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\3D Objects">
       <UniqueIdentifier>{648094bd-b787-4a07-b612-3c0f314c6314}</UniqueIdentifier>
     </Filter>
@@ -51,9 +48,6 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Source Files\Misc</Filter>
-    </ClCompile>
     <ClCompile Include="shader.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
@@ -62,6 +56,18 @@
     </ClCompile>
     <ClCompile Include="grid.cpp">
       <Filter>Source Files\3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="custom_model.cpp">
+      <Filter>Source Files\3D Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="load_shader.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="vector2.cpp">
+      <Filter>Source Files\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,9 +83,6 @@
     <ClInclude Include="camera.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="utils.h">
-      <Filter>Header Files\Misc</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Math debug\Math debug\shader.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
@@ -89,25 +92,17 @@
     <ClInclude Include="grid.h">
       <Filter>Header Files\3D Objects</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="rainbow.vert">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="rainbow.frag">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="flat.vert">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="flat.frag">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="phong.frag">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
-    <None Include="phong.vert">
-      <Filter>Source Files\Shaders</Filter>
-    </None>
+    <ClInclude Include="custom_model.h">
+      <Filter>Header Files\3D Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="load_shader.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="vector2.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
