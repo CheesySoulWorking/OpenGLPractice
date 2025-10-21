@@ -90,24 +90,24 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     // ===========================================================================================================
     
     // Load Shaders
-    std::string cubePhongVertSrc = LoadShaderSource("phong.vert");
-    std::string cubePhongFragSrc = LoadShaderSource("phong.frag");
+    std::string cubePhongVertSrc = LoadShaderSource("Shaders/phong.vert");
+    std::string cubePhongFragSrc = LoadShaderSource("Shaders/phong.frag");
     const char* cubePhongVertShader = cubePhongVertSrc.c_str();
     const char* cubePhongFragShader = cubePhongFragSrc.c_str();
 
-    std::string legoshiPhongVertSrc = LoadShaderSource("phong.vert");
-    std::string legoshiPhongFragSrc = LoadShaderSource("phong.frag");
+    std::string legoshiPhongVertSrc = LoadShaderSource("Shaders/phong.vert");
+    std::string legoshiPhongFragSrc = LoadShaderSource("Shaders/phong.frag");
     const char* legoshiPhongVertShader = legoshiPhongVertSrc.c_str();
     const char* legoshiPhongFragShader = legoshiPhongFragSrc.c_str();
 
-    std::string rainbowVertSrc = LoadShaderSource("rainbow.vert");
-    std::string rainbowFragSrc = LoadShaderSource("rainbow.frag");
+    std::string rainbowVertSrc = LoadShaderSource("Shaders/rainbow.vert");
+    std::string rainbowFragSrc = LoadShaderSource("Shaders/rainbow.frag");
     const char* rainbowVertShader = rainbowVertSrc.c_str();
     const char* rainbowFragShader = rainbowFragSrc.c_str();
 
 
-    std::string gridVertSrc = LoadShaderSource("flat.vert");
-    std::string gridFragSrc = LoadShaderSource("flat.frag");
+    std::string gridVertSrc = LoadShaderSource("Shaders/flat.vert");
+    std::string gridFragSrc = LoadShaderSource("Shaders/flat.frag");
     const char* gridVertShader = gridVertSrc.c_str();
     const char* gridFragShader = gridFragSrc.c_str();
     

@@ -165,14 +165,6 @@
     <ClInclude Include="load_shader.h" />
     <ClInclude Include="vector2.h" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="flat.frag" />
-    <None Include="flat.vert" />
-    <None Include="phong.frag" />
-    <None Include="phong.vert" />
-    <None Include="rainbow.frag" />
-    <None Include="rainbow.vert" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
